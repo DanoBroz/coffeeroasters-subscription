@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./containers/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {
@@ -21,7 +22,7 @@ module.exports = {
         'darkGreyBlue': '#333D4B',
         'paleOrange': '#FDD6BA',
         'lightCream': '#FEFCF7',
-        'grey': '#83888F'
+        'Grey': '#83888F'
       }
     },
   },
