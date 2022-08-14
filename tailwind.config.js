@@ -6,8 +6,10 @@ module.exports = {
   ],
   theme: {
     container: {
-      '2xl': '1280px',
       center: true,
+      screens: {
+        '2xl': '1280px',
+      },
     },
     extend: {},
   },
