@@ -18,3 +18,29 @@ a {
 * {
     box-sizing: border-box;
 }
+
+h1 {
+    @apply text-7xl;
+}
+
+h2 {
+    @apply text-[40px]
+        leading-[48px];
+}
+
+h3 {
+    @apply text-[32px]
+        leading-[36px];
+}
+
+h4 {
+    @apply text-2xl;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    @apply font-fraunces
+        font-black;
+}
