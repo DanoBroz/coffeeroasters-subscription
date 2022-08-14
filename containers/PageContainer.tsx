@@ -3,9 +3,12 @@ import { Navbar, Footer } from '../components'
 
 type PageContainerProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>
 
-export const PageContainer = ({ children, ...elementProps }: PageContainerProps) => {
+export const PageContainer = ({ className, children, ...elementProps }: PageContainerProps) => {
     return (
-        <div {...elementProps}>
+        <div
+            className={className}
+            {...elementProps}
+        >
             <Navbar />
             {children}
             <Footer />
