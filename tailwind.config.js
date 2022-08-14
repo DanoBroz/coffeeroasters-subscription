@@ -11,6 +11,10 @@ module.exports = {
         '2xl': '1280px',
       },
     },
+    fontFamily: {
+      'fraunces': ['Fraunces'],
+      'barlow': ['Barlow'],
+    },
     extend: {
       colors: {
         'darkCyan': '#0E8784',

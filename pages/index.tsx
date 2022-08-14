@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/google-font-display */
+/* eslint-disable @next/next/no-page-custom-font */
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -17,6 +19,14 @@ const Home: NextPage = () => {
                     type='image/png'
                     sizes='32x32'
                     href='/favicon.png'
+                />
+                <link
+                    href='https://fonts.googleapis.com/css2?family=Fraunces'
+                    rel='stylesheet'
+                />
+                <link
+                    href='https://fonts.googleapis.com/css2?family=Barlow'
+                    rel='stylesheet'
                 />
             </Head>
             <h1 className='text-blue-800 text-2xl'>Hello there</h1>
