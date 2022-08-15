@@ -16,7 +16,7 @@ export const CollectionItem = (props: CollectionItemProps) => {
 
     return (
         <div
-            className={classnames('flex max-w-[255px] flex-col text-center', className)}
+            className={classnames('grid max-w-[255px] text-center', className)}
             {...elementProps}
         >
             <div>
