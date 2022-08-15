@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { Button, Jumbotron } from '../components'
-import { PageContainer } from '../containers'
+import { Collections, PageContainer } from '../containers'
 
 const Home: NextPage = () => {
     return (
@@ -8,7 +8,7 @@ const Home: NextPage = () => {
             <div className='container'>
                 <Jumbotron
                     bgUrl='home/desktop/image-hero-coffeepress.jpg'
-                    className='mb-[136px]'
+                    className='mb-[262px]'
                 >
                     <div className='max-w-[493px] py-[117px]'>
                         <div className='pb-14'>
@@ -21,6 +21,7 @@ const Home: NextPage = () => {
                         <Button>Create your plan</Button>
                     </div>
                 </Jumbotron>
+                <Collections />
             </div>
         </PageContainer>
     )
