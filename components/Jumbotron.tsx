@@ -12,8 +12,9 @@ export const Jumbotron = (props: JumbotronProps) => {
 
     return (
         <div
+            style={{ backgroundImage: `url('/assets/${bgUrl}')` }}
             className={classnames(
-                `flex items-center rounded-[10px] bg-cover bg-center bg-no-repeat pl-[85px] text-lightCream bg-[url('/assets/${bgUrl}')]`,
+                `flex items-center rounded-[10px] bg-cover bg-center bg-no-repeat pl-[85px] text-lightCream`,
                 className
             )}
             {...elementProps}
