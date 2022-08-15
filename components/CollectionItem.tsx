@@ -16,10 +16,10 @@ export const CollectionItem = (props: CollectionItemProps) => {
 
     return (
         <div
-            className={classnames('grid max-w-[255px] text-center', className)}
+            className={classnames('grid max-w-[255px] text-center text-darkGreyBlue', className)}
             {...elementProps}
         >
-            <div>
+            <div className='pb-[71.5px]'>
                 <Image
                     src={`/assets/home/desktop/image-${imageSrc}.png`}
                     alt={alt}
@@ -27,7 +27,7 @@ export const CollectionItem = (props: CollectionItemProps) => {
                     height={193}
                 />
             </div>
-            <span className='font-fraunces font-black uppercase'>{itemHeading}</span>
+            <span className='pb-6 font-fraunces text-2xl font-black capitalize'>{itemHeading}</span>
             <span className='font-barlow leading-[26px]'>{itemText}</span>
         </div>
     )
