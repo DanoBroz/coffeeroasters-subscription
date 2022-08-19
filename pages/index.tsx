@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { Button, Jumbotron } from '../components'
-import { Collections, PageContainer } from '../containers'
+import { Collections, PageContainer, WhySection } from '../containers'
 
 const Home: NextPage = () => {
     return (
@@ -22,6 +22,7 @@ const Home: NextPage = () => {
                     </div>
                 </Jumbotron>
                 <Collections />
+                <WhySection />
             </div>
         </PageContainer>
     )
