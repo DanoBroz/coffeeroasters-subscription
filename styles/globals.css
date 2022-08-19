@@ -43,5 +43,5 @@ h2,
 h3,
 h4 {
     @apply font-fraunces
-        font-black;
+        font-bold;
 }
