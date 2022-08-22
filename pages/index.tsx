@@ -23,7 +23,7 @@ const Home: NextPage = () => {
                 </Jumbotron>
                 <Collections />
                 <WhySection />
-                <HowSection />
+                <HowSection className='mb-[200px] px-[85px]' />
             </div>
         </PageContainer>
     )
