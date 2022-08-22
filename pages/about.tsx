@@ -53,6 +53,56 @@ function About() {
                         className='relative -top-[88px] h-[474px] w-[445px] rounded-lg bg-cover bg-center bg-no-repeat'
                     ></div>
                 </div>
+                <div className='mb-[168px] px-[85px]'>
+                    <span className='mb-[72px] inline-block font-fraunces text-2xl font-bold text-Grey'>Our headquarters</span>
+                    <div className='grid grid-cols-3 justify-start'>
+                        <div className='grid gap-y-[46px]'>
+                            <div
+                                style={{ backgroundImage: `url('/assets/about/desktop/illustration-uk.svg')` }}
+                                className='h-[50px] w-[52px] bg-contain bg-center bg-no-repeat'
+                            ></div>
+                            <article>
+                                <h3 className='pb-6'>United Kingdom</h3>
+                                <ul className='list-none font-barlow leading-[26px]'>
+                                    <li>68 Asfordby Rd</li>
+                                    <li>Alcaston</li>
+                                    <li>SY6 1YA</li>
+                                    <li>+44 1241 918425</li>
+                                </ul>
+                            </article>
+                        </div>
+                        <div className='grid gap-y-[46px]'>
+                            <div
+                                style={{ backgroundImage: `url('/assets/about/desktop/illustration-canada.svg')` }}
+                                className='h-[50px] w-[52px] bg-contain bg-center bg-no-repeat'
+                            ></div>
+                            <article>
+                                <h3 className='pb-6'>Canada</h3>
+                                <ul className='list-none font-barlow leading-[26px]'>
+                                    <li>1528 Eglinton Avenue</li>
+                                    <li>Toronto</li>
+                                    <li>Ontario M4P 1A6</li>
+                                    <li>+1 416 485 2997</li>
+                                </ul>
+                            </article>
+                        </div>
+                        <div className='grid gap-y-[46px]'>
+                            <div
+                                style={{ backgroundImage: `url('/assets/about/desktop/illustration-australia.svg')` }}
+                                className='h-[50px] w-[52px] bg-contain bg-center bg-no-repeat'
+                            ></div>
+                            <article>
+                                <h3 className='pb-6'>Australia</h3>
+                                <ul className='list-none font-barlow leading-[26px]'>
+                                    <li>36 Swanston Street</li>
+                                    <li>Kewell</li>
+                                    <li>Victoria</li>
+                                    <li>+61 4 9928 3629</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </div>
+                </div>
             </div>
         </PageContainer>
     )
