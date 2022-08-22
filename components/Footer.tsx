@@ -5,7 +5,7 @@ export const Footer = () => {
     const getIcon = (icon: string) => `/assets/shared/desktop/icon-${icon}.svg`
 
     return (
-        <div className='container flex items-center justify-between bg-darkGreyBlue py-[47px] px-[85px]'>
+        <div className='container mb-[88px] flex items-center justify-between bg-darkGreyBlue py-[47px] px-[85px]'>
             <div className='flex items-center gap-[103px]'>
                 <NavigationItemsContainer isLight />
             </div>
