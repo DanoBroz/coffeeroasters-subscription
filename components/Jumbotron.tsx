@@ -14,7 +14,7 @@ export const Jumbotron = (props: JumbotronProps) => {
         <div
             style={{ backgroundImage: `url('/assets/${bgUrl}')` }}
             className={classnames(
-                `flex flex-col justify-center rounded-[10px] bg-cover bg-center bg-no-repeat pl-[85px] text-lightCream`,
+                `flex items-center rounded-[10px] bg-cover bg-center bg-no-repeat pl-[85px] text-lightCream`,
                 className
             )}
             {...elementProps}
