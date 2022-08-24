@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react'
-import { Jumbotron, OptionsSelect } from '../components'
+import { Button, Jumbotron, OptionsSelect } from '../components'
 import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
 
@@ -44,7 +44,7 @@ function Create() {
                     isDark
                     className='mb-[168px] py-[100px] px-[85px]'
                 />
-                <div className='grid grid-cols-[255px_minmax(328px,_1fr)] gap-x-[125px] px-[85px]'>
+                <div className='mb-[168px] grid grid-cols-[255px_minmax(328px,_1fr)] gap-x-[125px] px-[85px]'>
                     <div className='sticky top-14 flex h-max flex-col items-start [&>a]:w-full'>
                         {['Preferences', 'Bean Type', 'Quantity', 'Grind Option', 'Deliveries'].map((item, index) => (
                             <a
@@ -83,6 +83,9 @@ function Create() {
                             select={deliveries}
                             setSelect={setDeliveries}
                         />
+                        <div className='text-right'>
+                            <Button>Create my plan!</Button>
+                        </div>
                     </form>
                 </div>
             </div>
