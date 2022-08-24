@@ -1,36 +1,33 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import classnames from 'classnames'
+import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react'
 import { Jumbotron } from '../components'
 import { HowSection, PageContainer } from '../containers'
 
-type Preferences = 'Capsule' | 'Filter' | 'Espresso' | undefined
-type BeanType = 'Single Origin' | 'Decaf' | 'Blended' | undefined
-type Quantity = '250g' | '500g' | '1000g' | undefined
-type GrindOption = 'Wholebean' | 'Filter' | 'Cafetiére' | undefined
-type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | undefined
+type Option = string | undefined
+
+type Preferences = 'Capsule' | 'Filter' | 'Espresso' | Option
+type BeanType = 'Single Origin' | 'Decaf' | 'Blended' | Option
+type Quantity = '250g' | '500g' | '1000g' | Option
+type GrindOption = 'Wholebean' | 'Filter' | 'Cafetiére' | Option
+type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | Option
 
 type Options = Preferences | BeanType | Quantity | GrindOption | Deliveries
 
 function Create() {
-    const [preferences, setPreferences] = useState<string | undefined>()
+    const [preferences, setPreferences] = useState<Preferences | string>()
     const [beanType, setBeanType] = useState<string | undefined>()
     const [quantity, setQuantity] = useState<string | undefined>()
     const [grindOption, setGrindOption] = useState<string | undefined>()
     const [deliveries, setDeliveries] = useState<string | undefined>()
 
-    const preferencesRef = useRef<HTMLSelectElement>(null)
-    const beanRef = useRef<HTMLSelectElement>(null)
-    const quantityRef = useRef<HTMLSelectElement>(null)
-    const grindRef = useRef<HTMLSelectElement>(null)
-    const deliveriesRef = useRef<HTMLSelectElement>(null)
-
-    const handleChange = (e: ChangeEvent<HTMLSelectElement>, setFunction: Dispatch<SetStateAction<string | undefined>>) => {
-        e.preventDefault()
-        setFunction(e.target.value)
-    }
-
     useEffect(() => {
         console.log(preferences, beanType, quantity, grindOption, deliveries)
     }, [preferences, beanType, quantity, grindOption, deliveries])
+
+    const handleOptionChange = (e: MouseEvent, value: string, setFunction: Dispatch<SetStateAction<Option>>) => {
+        e.preventDefault()
+        setFunction(value)
+    }
 
     return (
         <PageContainer>
@@ -64,83 +61,33 @@ function Create() {
                             </a>
                         ))}
                     </div>
-                    <div className='grid'>
-                        <form>
-                            <div>
-                                <select
-                                    ref={preferencesRef}
-                                    value={preferences}
-                                    onChange={(e) => handleChange(e, setPreferences)}
+                    <form className='grid'>
+                        <div className='grid grid-cols-3 gap-x-[23px]'>
+                            {[
+                                { heading: 'Capsule', text: 'Compatible with Nespresso systems and similar brewers' },
+                                { heading: 'Filter', text: 'For pour over or drip methods like Aeropress, Chemex, and V60' },
+                                {
+                                    heading: 'Espresso',
+                                    text: 'Dense and finely ground beans for an intense, flavorful experience',
+                                },
+                            ].map((item, index) => (
+                                <button
+                                    key={`${item.heading}-${index}`}
+                                    className={classnames(
+                                        'flex h-[250px] flex-col gap-6 rounded-lg px-7 py-8 text-left transition-colors',
+                                        {
+                                            'bg-[#F4F1EB] text-darkGreyBlue hover:bg-paleOrange': preferences !== item.heading,
+                                            'bg-darkCyan text-lightCream': preferences === item.heading,
+                                        }
+                                    )}
+                                    onClick={(e) => handleOptionChange(e, item.heading, setPreferences)}
                                 >
-                                    {[undefined, 'Capsule', 'Filter', 'Espresso'].map((item, index) => (
-                                        <option
-                                            key={`${item}-${index}`}
-                                            value={item}
-                                        >
-                                            {item}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    ref={beanRef}
-                                    value={beanType}
-                                    onChange={(e) => handleChange(e, setBeanType)}
-                                >
-                                    {[undefined, 'Single Origin', 'Decaf', 'Blended'].map((item, index) => (
-                                        <option
-                                            key={`${item}-${index}`}
-                                            value={item}
-                                        >
-                                            {item}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    ref={quantityRef}
-                                    value={quantity}
-                                    onChange={(e) => handleChange(e, setQuantity)}
-                                >
-                                    {[undefined, '250g', '500g', '1000g'].map((item, index) => (
-                                        <option
-                                            key={`${item}-${index}`}
-                                            value={item}
-                                        >
-                                            {item}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    ref={grindRef}
-                                    value={grindOption}
-                                    onChange={(e) => handleChange(e, setGrindOption)}
-                                >
-                                    {[undefined, 'Wholebean', 'Filter', 'Cafetiére'].map((item, index) => (
-                                        <option
-                                            key={`${item}-${index}`}
-                                            value={item}
-                                        >
-                                            {item}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    ref={deliveriesRef}
-                                    value={deliveries}
-                                    onChange={(e) => handleChange(e, setDeliveries)}
-                                >
-                                    {[undefined, 'Every week', 'Every 2 weeks', 'Every month'].map((item, index) => (
-                                        <option
-                                            key={`${item}-${index}`}
-                                            value={item}
-                                        >
-                                            {item}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        </form>
-                        <div className=''></div>
-                    </div>
+                                    <span className='block font-fraunces text-2xl font-bold'>{item.heading}</span>
+                                    <span className='font-ligth block font-barlow leading-[26px]'>{item.text}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </form>
                 </div>
             </div>
         </PageContainer>
