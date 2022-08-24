@@ -1,7 +1,20 @@
+import { useState } from 'react'
 import { Jumbotron } from '../components'
 import { HowSection, PageContainer } from '../containers'
 
+type Preferences = 'Capsule' | 'Filter' | 'Espresso' | undefined
+type BeanType = 'Single Origin' | 'Decaf' | 'Blended' | undefined
+type Quantity = '250g' | '500g' | '1000g' | undefined
+type GrindOption = 'Wholebean' | 'Filter' | 'Cafetiére' | undefined
+type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | undefined
+
 function Create() {
+    const [preferences, setPreferences] = useState<Preferences>()
+    const [beanType, setBeanType] = useState<BeanType>()
+    const [quantity, setQuantity] = useState<Quantity>()
+    const [grindOption, setGrindOption] = useState<GrindOption>()
+    const [deliveries, setDeliveries] = useState<Deliveries>()
+
     return (
         <PageContainer>
             <div className='container'>
@@ -34,7 +47,9 @@ function Create() {
                             </a>
                         ))}
                     </div>
-                    <div>Karel</div>
+                    <div className='grid'>
+                        <div className=''></div>
+                    </div>
                 </div>
             </div>
         </PageContainer>
