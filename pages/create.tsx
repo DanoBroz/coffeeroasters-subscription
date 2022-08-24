@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { Jumbotron } from '../components'
 import { HowSection, PageContainer } from '../containers'
 
@@ -8,12 +8,29 @@ type Quantity = '250g' | '500g' | '1000g' | undefined
 type GrindOption = 'Wholebean' | 'Filter' | 'Cafetiére' | undefined
 type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | undefined
 
+type Options = Preferences | BeanType | Quantity | GrindOption | Deliveries
+
 function Create() {
-    const [preferences, setPreferences] = useState<Preferences>()
-    const [beanType, setBeanType] = useState<BeanType>()
-    const [quantity, setQuantity] = useState<Quantity>()
-    const [grindOption, setGrindOption] = useState<GrindOption>()
-    const [deliveries, setDeliveries] = useState<Deliveries>()
+    const [preferences, setPreferences] = useState<string | undefined>()
+    const [beanType, setBeanType] = useState<string | undefined>()
+    const [quantity, setQuantity] = useState<string | undefined>()
+    const [grindOption, setGrindOption] = useState<string | undefined>()
+    const [deliveries, setDeliveries] = useState<string | undefined>()
+
+    const preferencesRef = useRef<HTMLSelectElement>(null)
+    const beanRef = useRef<HTMLSelectElement>(null)
+    const quantityRef = useRef<HTMLSelectElement>(null)
+    const grindRef = useRef<HTMLSelectElement>(null)
+    const deliveriesRef = useRef<HTMLSelectElement>(null)
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>, setFunction: Dispatch<SetStateAction<string | undefined>>) => {
+        e.preventDefault()
+        setFunction(e.target.value)
+    }
+
+    useEffect(() => {
+        console.log(preferences, beanType, quantity, grindOption, deliveries)
+    }, [preferences, beanType, quantity, grindOption, deliveries])
 
     return (
         <PageContainer>
@@ -48,6 +65,80 @@ function Create() {
                         ))}
                     </div>
                     <div className='grid'>
+                        <form>
+                            <div>
+                                <select
+                                    ref={preferencesRef}
+                                    value={preferences}
+                                    onChange={(e) => handleChange(e, setPreferences)}
+                                >
+                                    {[undefined, 'Capsule', 'Filter', 'Espresso'].map((item, index) => (
+                                        <option
+                                            key={`${item}-${index}`}
+                                            value={item}
+                                        >
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    ref={beanRef}
+                                    value={beanType}
+                                    onChange={(e) => handleChange(e, setBeanType)}
+                                >
+                                    {[undefined, 'Single Origin', 'Decaf', 'Blended'].map((item, index) => (
+                                        <option
+                                            key={`${item}-${index}`}
+                                            value={item}
+                                        >
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    ref={quantityRef}
+                                    value={quantity}
+                                    onChange={(e) => handleChange(e, setQuantity)}
+                                >
+                                    {[undefined, '250g', '500g', '1000g'].map((item, index) => (
+                                        <option
+                                            key={`${item}-${index}`}
+                                            value={item}
+                                        >
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    ref={grindRef}
+                                    value={grindOption}
+                                    onChange={(e) => handleChange(e, setGrindOption)}
+                                >
+                                    {[undefined, 'Wholebean', 'Filter', 'Cafetiére'].map((item, index) => (
+                                        <option
+                                            key={`${item}-${index}`}
+                                            value={item}
+                                        >
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
+                                    ref={deliveriesRef}
+                                    value={deliveries}
+                                    onChange={(e) => handleChange(e, setDeliveries)}
+                                >
+                                    {[undefined, 'Every week', 'Every 2 weeks', 'Every month'].map((item, index) => (
+                                        <option
+                                            key={`${item}-${index}`}
+                                            value={item}
+                                        >
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </form>
                         <div className=''></div>
                     </div>
                 </div>
