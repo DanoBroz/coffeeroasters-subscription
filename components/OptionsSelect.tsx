@@ -1,5 +1,6 @@
 import classnames from 'classnames'
-import { Dispatch, SetStateAction, MouseEvent } from 'react'
+import { Dispatch, SetStateAction, MouseEvent, useRef } from 'react'
+import { useOpen } from '../hooks'
 
 type Option = string | undefined
 type SetOption = Dispatch<SetStateAction<Option>>
@@ -16,21 +17,45 @@ interface OptionsSelectProps {
 }
 
 export function OptionsSelect({ select, setSelect, data }: OptionsSelectProps) {
+    const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen()
+
+    const optionRef = useRef<HTMLDivElement>(null)
+    const optionScrollHeight = `${optionRef.current?.scrollHeight}px`
+
     const handleOptionChange = (e: MouseEvent, value: string, setFunction: SetOption) => {
         e.preventDefault()
         setFunction(value)
     }
 
+    const handleOptionView = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setOptionsOpen((prevState) => !prevState)
+    }
+
     return (
         <div>
-            <button className='flex w-full items-center justify-between font-fraunces text-[2.5rem] font-bold leading-[3rem] text-Grey transition-colors hover:text-darkGreyBlue'>
+            <button
+                onClick={handleOptionView}
+                className='flex w-full items-center justify-between font-fraunces text-[2.5rem] font-bold leading-[3rem] text-Grey transition-colors hover:text-darkGreyBlue'
+            >
                 <span className='inline-block'>How do you drink your coffee?</span>
                 <span
                     style={{ backgroundImage: `url('/assets/plan/desktop/icon-arrow.svg')` }}
-                    className='inline-block h-[11.92px] w-[18.19px] bg-cover bg-center bg-no-repeat'
+                    className={classnames(
+                        'inline-block h-[11.92px] w-[18.19px] bg-cover bg-center bg-no-repeat transition-transform',
+                        {
+                            'rotate-180': optionsOpen,
+                        }
+                    )}
                 ></span>
             </button>
-            <div className='grid grid-cols-3 gap-x-[23px]'>
+            <div
+                ref={optionRef}
+                className={classnames('accordion-options grid grid-cols-3 gap-x-[23px]', {
+                    'max-h-0 overflow-hidden': !optionsOpen,
+                    [`max-h-[${optionScrollHeight}]`]: optionsOpen,
+                })}
+            >
                 {data.map((item, index) => (
                     <button
                         key={`${item.heading}-${index}`}
