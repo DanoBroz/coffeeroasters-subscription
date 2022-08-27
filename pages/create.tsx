@@ -59,26 +59,31 @@ function Create() {
                     </div>
                     <form className='grid justify-start gap-y-[88px]'>
                         <OptionsSelect
+                            optionHeading='How do you drink your coffee'
                             data={OptionsData.preferences}
                             select={preferences}
                             setSelect={setPreferences}
                         />
                         <OptionsSelect
+                            optionHeading='What type of coffee'
                             data={OptionsData.beanType}
                             select={beanType}
                             setSelect={setBeanType}
                         />
                         <OptionsSelect
+                            optionHeading='How much would you like'
                             data={OptionsData.quantity}
                             select={quantity}
                             setSelect={setQuantity}
                         />
                         <OptionsSelect
+                            optionHeading='Want us to grind them'
                             data={OptionsData.grindOption}
                             select={grindOption}
                             setSelect={setGrindOption}
                         />
                         <OptionsSelect
+                            optionHeading='How often should we deliver'
                             data={OptionsData.deliveries}
                             select={deliveries}
                             setSelect={setDeliveries}

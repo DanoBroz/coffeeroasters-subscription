@@ -11,12 +11,14 @@ interface OptionData {
 }
 
 interface OptionsSelectProps {
+    optionHeading: string
     select: Option
     setSelect: SetOption
     data: OptionData[]
 }
 
-export function OptionsSelect({ select, setSelect, data }: OptionsSelectProps) {
+export function OptionsSelect(props: OptionsSelectProps) {
+    const { select, setSelect, data, optionHeading } = props
     const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen()
 
     const optionRef = useRef<HTMLDivElement>(null)
@@ -36,9 +38,14 @@ export function OptionsSelect({ select, setSelect, data }: OptionsSelectProps) {
         <div>
             <button
                 onClick={handleOptionView}
-                className='flex w-full items-center justify-between font-fraunces text-[2.5rem] font-bold leading-[3rem] text-Grey transition-colors hover:text-darkGreyBlue'
+                className={classnames(
+                    'flex w-full items-center justify-between font-fraunces text-[2.5rem] font-bold leading-[3rem] text-Grey transition-colors hover:text-darkGreyBlue',
+                    {
+                        'mb-14': optionsOpen,
+                    }
+                )}
             >
-                <span className='inline-block'>How do you drink your coffee?</span>
+                <span className='inline-block'>{optionHeading}?</span>
                 <span
                     style={{ backgroundImage: `url('/assets/plan/desktop/icon-arrow.svg')` }}
                     className={classnames(
