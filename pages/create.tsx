@@ -25,6 +25,8 @@ function Create() {
         console.log(preferences, beanType, quantity, grindOption, deliveries)
     }, [preferences, beanType, quantity, grindOption, deliveries])
 
+    const placeholder = (changeText: Option) => changeText || '_____'
+
     return (
         <PageContainer>
             <div className='container'>
@@ -63,6 +65,7 @@ function Create() {
                             data={OptionsData.preferences}
                             select={preferences}
                             setSelect={setPreferences}
+                            initialOpen
                         />
                         <OptionsSelect
                             optionHeading='What type of coffee'
@@ -81,6 +84,7 @@ function Create() {
                             data={OptionsData.grindOption}
                             select={grindOption}
                             setSelect={setGrindOption}
+                            isDisabled={preferences === 'Capsule'}
                         />
                         <OptionsSelect
                             optionHeading='How often should we deliver'
@@ -88,6 +92,16 @@ function Create() {
                             select={deliveries}
                             setSelect={setDeliveries}
                         />
+                        <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
+                            <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>How it works</span>
+                            <p className='font-fraunces text-2xl font-bold leading-[40px] text-white'>
+                                {`“I drink my coffee using ${placeholder(preferences)}, with a ${placeholder(
+                                    beanType
+                                )} type of bean. ${placeholder(quantity)}${
+                                    preferences !== 'Capsule' ? ` ground ala ${placeholder(grindOption)}` : ''
+                                }, sent to me ${placeholder(deliveries)}.”`}
+                            </p>
+                        </div>
                         <div className='text-right'>
                             <Button>Create my plan!</Button>
                         </div>

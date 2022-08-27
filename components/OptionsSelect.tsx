@@ -14,12 +14,14 @@ interface OptionsSelectProps {
     optionHeading: string
     select: Option
     setSelect: SetOption
+    isDisabled?: boolean
+    initialOpen?: boolean
     data: OptionData[]
 }
 
 export function OptionsSelect(props: OptionsSelectProps) {
-    const { select, setSelect, data, optionHeading } = props
-    const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen()
+    const { select, setSelect, data, optionHeading, isDisabled, initialOpen } = props
+    const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen(initialOpen)
 
     const optionRef = useRef<HTMLDivElement>(null)
     const optionScrollHeight = `${optionRef.current?.scrollHeight}px`
@@ -37,9 +39,10 @@ export function OptionsSelect(props: OptionsSelectProps) {
     return (
         <div>
             <button
+                disabled={isDisabled}
                 onClick={handleOptionView}
                 className={classnames(
-                    'flex w-full items-center justify-between font-fraunces text-[2.5rem] font-bold leading-[3rem] text-Grey transition-colors hover:text-darkGreyBlue',
+                    'flex w-full items-center justify-between font-fraunces text-[2.5rem] font-bold leading-[3rem] text-Grey transition-colors hover:text-darkGreyBlue disabled:opacity-40 disabled:hover:cursor-not-allowed disabled:hover:text-Grey',
                     {
                         'mb-14': optionsOpen,
                     }
