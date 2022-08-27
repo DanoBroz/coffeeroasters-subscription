@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react'
 import { Button, HowStep } from '../components'
 import classnames from 'classnames'
+import Link from 'next/link'
 
 interface HowSectionConfig {
     isDark?: boolean
@@ -45,7 +46,11 @@ export const HowSection = ({ className, isDark = false }: HowSectionProps) => {
                     content='We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning world-class coffees curated to provide a distinct tasting experience.'
                 />
             </div>
-            {!isDark && <Button>Create your plan</Button>}
+            {!isDark && (
+                <Button>
+                    <Link href='/create'>Create your plan</Link>
+                </Button>
+            )}
         </section>
     )
 }

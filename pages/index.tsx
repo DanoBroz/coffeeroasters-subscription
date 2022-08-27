@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import { Button, Jumbotron } from '../components'
 import { Collections, HowSection, PageContainer, WhySection } from '../containers'
 
@@ -18,7 +19,9 @@ const Home: NextPage = () => {
                                 our best roasters delivered directly to your door, at your schedule.
                             </p>
                         </div>
-                        <Button>Create your plan</Button>
+                        <Button>
+                            <Link href='/create'>Create your plan</Link>
+                        </Button>
                     </div>
                 </Jumbotron>
                 <Collections />
