@@ -3,6 +3,7 @@ import { Button, Jumbotron, OptionsSelect } from '../components'
 import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
 import { useUIDSeed } from 'react-uid'
+import classnames from 'classnames'
 
 type Option = string | undefined
 
@@ -51,14 +52,15 @@ function Create() {
                 <div className='mb-[168px] grid grid-cols-[255px_minmax(328px,_1fr)] gap-x-[125px] px-[85px]'>
                     <div className='sticky top-14 flex h-max flex-col items-start [&>a]:w-full'>
                         {['Preferences', 'Bean Type', 'Quantity', 'Grind Option', 'Deliveries'].map((item, index) => (
-                            <a
-                                href={`#${item.toLowerCase().split(' ').join('-')}`}
+                            <button
+                                // href={`#${item.toLowerCase().split(' ').join('-')}`}
+                                disabled={item === 'Grind Option' && preferences === 'Capsule'}
                                 key={uid(item)}
-                                className='flex gap-[29px] border-b border-Grey py-6 font-fraunces text-2xl font-bold opacity-40 transition-opacity first:pt-0 last:border-b-0 hover:opacity-60 [&>span:first-child]:first:text-darkCyan'
+                                className='flex gap-[29px] border-b border-Grey py-6 font-fraunces text-2xl font-bold opacity-40 transition-opacity first:pt-0 last:border-b-0 hover:opacity-60 disabled:opacity-20 disabled:hover:cursor-not-allowed disabled:hover:opacity-20 [&>span:first-child]:first:text-darkCyan'
                             >
                                 <span className='text-Grey'>0{index + 1}</span>
                                 <span className='text-darkGreyBlue'>{item}</span>
-                            </a>
+                            </button>
                         ))}
                     </div>
                     <form className='grid justify-start gap-y-[88px]'>
