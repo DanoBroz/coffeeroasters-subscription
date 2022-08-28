@@ -25,7 +25,7 @@ function Create() {
         console.log(preferences, beanType, quantity, grindOption, deliveries)
     }, [preferences, beanType, quantity, grindOption, deliveries])
 
-    const placeholder = (changeText: Option) => changeText || '_____'
+    const placeholder = (changeText: Option) => <span className='text-darkCyan'>{changeText || '_______'}</span>
 
     return (
         <PageContainer>
@@ -92,18 +92,19 @@ function Create() {
                             select={deliveries}
                             setSelect={setDeliveries}
                         />
-                        <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
-                            <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>How it works</span>
-                            <p className='font-fraunces text-2xl font-bold leading-[40px] text-white'>
-                                {`“I drink my coffee using ${placeholder(preferences)}, with a ${placeholder(
-                                    beanType
-                                )} type of bean. ${placeholder(quantity)}${
-                                    preferences !== 'Capsule' ? ` ground ala ${placeholder(grindOption)}` : ''
-                                }, sent to me ${placeholder(deliveries)}.”`}
-                            </p>
-                        </div>
-                        <div className='text-right'>
-                            <Button>Create my plan!</Button>
+                        <div className='grid gap-y-[40px]'>
+                            <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
+                                <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>How it works</span>
+                                <p className='font-fraunces text-2xl font-bold leading-[40px] text-white'>
+                                    “I drink my coffee using {placeholder(preferences)}, with a {placeholder(beanType)} type of
+                                    bean. {placeholder(quantity)}
+                                    {preferences !== 'Capsule' ? <span> ground ala {placeholder(grindOption)}</span> : null}, sent
+                                    to me {placeholder(deliveries)}.”
+                                </p>
+                            </div>
+                            <div className='text-right'>
+                                <Button>Create my plan!</Button>
+                            </div>
                         </div>
                     </form>
                 </div>
