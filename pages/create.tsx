@@ -1,8 +1,8 @@
-import classnames from 'classnames'
-import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Jumbotron, OptionsSelect } from '../components'
 import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
+import { useUIDSeed } from 'react-uid'
 
 type Option = string | undefined
 
@@ -20,6 +20,8 @@ function Create() {
     const [quantity, setQuantity] = useState<string | undefined>()
     const [grindOption, setGrindOption] = useState<string | undefined>()
     const [deliveries, setDeliveries] = useState<string | undefined>()
+
+    const uid = useUIDSeed()
 
     useEffect(() => {
         console.log(preferences, beanType, quantity, grindOption, deliveries)
@@ -51,7 +53,7 @@ function Create() {
                         {['Preferences', 'Bean Type', 'Quantity', 'Grind Option', 'Deliveries'].map((item, index) => (
                             <a
                                 href={`#${item.toLowerCase().split(' ').join('-')}`}
-                                key={`item-${index}`}
+                                key={uid(item)}
                                 className='flex gap-[29px] border-b border-Grey py-6 font-fraunces text-2xl font-bold opacity-40 transition-opacity first:pt-0 last:border-b-0 hover:opacity-60 [&>span:first-child]:first:text-darkCyan'
                             >
                                 <span className='text-Grey'>0{index + 1}</span>
