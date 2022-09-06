@@ -39,7 +39,8 @@ export function OptionsSelect(props: OptionsSelectProps) {
 
     useEffect(() => {
         isOptionOpen && setOptionsOpen(true)
-    }, [isOptionOpen, setOptionsOpen])
+        !isOptionOpen && initialOpen === undefined && setOptionsOpen(false)
+    }, [initialOpen, isOptionOpen, setOptionsOpen])
 
     return (
         <div>
