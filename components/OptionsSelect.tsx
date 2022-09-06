@@ -1,9 +1,9 @@
 import classnames from 'classnames'
-import { Dispatch, SetStateAction, MouseEvent, useRef } from 'react'
+import { Dispatch, SetStateAction, MouseEvent, useRef, useEffect } from 'react'
 import { useOpen } from '../hooks'
 
 type Option = string | undefined
-type SetOption = Dispatch<SetStateAction<Option>>
+type SetStateType<SetType> = Dispatch<SetStateAction<SetType>>
 
 interface OptionData {
     heading: string
@@ -13,20 +13,21 @@ interface OptionData {
 interface OptionsSelectProps {
     optionHeading: string
     select: Option
-    setSelect: SetOption
+    setSelect: SetStateType<Option>
     isDisabled?: boolean
     initialOpen?: boolean
+    isOptionOpen?: boolean
     data: OptionData[]
 }
 
 export function OptionsSelect(props: OptionsSelectProps) {
-    const { select, setSelect, data, optionHeading, isDisabled, initialOpen } = props
+    const { select, setSelect, data, optionHeading, isDisabled, initialOpen, isOptionOpen } = props
     const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen(initialOpen)
 
     const optionRef = useRef<HTMLDivElement>(null)
     const optionScrollHeight = `${optionRef.current?.scrollHeight}px`
 
-    const handleOptionChange = (e: MouseEvent, value: string, setFunction: SetOption) => {
+    const handleOptionChange = (e: MouseEvent, value: string, setFunction: SetStateType<Option>) => {
         e.preventDefault()
         setFunction(value)
     }
@@ -35,6 +36,10 @@ export function OptionsSelect(props: OptionsSelectProps) {
         e.preventDefault()
         setOptionsOpen((prevState) => !prevState)
     }
+
+    useEffect(() => {
+        isOptionOpen && setOptionsOpen(true)
+    }, [isOptionOpen, setOptionsOpen])
 
     return (
         <div>

@@ -56,7 +56,9 @@ function Create() {
                                 // href={`#${item.toLowerCase().split(' ').join('-')}`}
                                 disabled={item === 'Grind Option' && preferences === 'Capsule'}
                                 key={uid(item)}
-                                className='flex gap-[29px] border-b border-Grey py-6 font-fraunces text-2xl font-bold opacity-40 transition-opacity first:pt-0 last:border-b-0 hover:opacity-60 disabled:opacity-20 disabled:hover:cursor-not-allowed disabled:hover:opacity-20 [&>span:first-child]:first:text-darkCyan'
+                                className={classnames(
+                                    'flex gap-[29px] border-b border-Grey py-6 font-fraunces text-2xl font-bold opacity-40 transition-opacity first:pt-0 last:border-b-0 hover:opacity-60 disabled:opacity-20 disabled:hover:cursor-not-allowed disabled:hover:opacity-20 [&>span:first-child]:first:text-darkCyan'
+                                )}
                             >
                                 <span className='text-Grey'>0{index + 1}</span>
                                 <span className='text-darkGreyBlue'>{item}</span>
@@ -76,12 +78,14 @@ function Create() {
                             data={OptionsData.beanType}
                             select={beanType}
                             setSelect={setBeanType}
+                            isOptionOpen={!!preferences}
                         />
                         <OptionsSelect
                             optionHeading='How much would you like'
                             data={OptionsData.quantity}
                             select={quantity}
                             setSelect={setQuantity}
+                            isOptionOpen={!!beanType}
                         />
                         <OptionsSelect
                             optionHeading='Want us to grind them'
@@ -89,12 +93,14 @@ function Create() {
                             select={grindOption}
                             setSelect={setGrindOption}
                             isDisabled={preferences === 'Capsule'}
+                            isOptionOpen={!!quantity && preferences !== 'Capsule'}
                         />
                         <OptionsSelect
                             optionHeading='How often should we deliver'
                             data={OptionsData.deliveries}
                             select={deliveries}
                             setSelect={setDeliveries}
+                            isOptionOpen={!!grindOption || (preferences === 'Capsule' && !!quantity)}
                         />
                         <div className='grid gap-y-[40px]'>
                             <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
