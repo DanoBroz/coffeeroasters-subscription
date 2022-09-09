@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 import { Button, Jumbotron, OptionsSelect } from '../components'
 import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
@@ -15,12 +15,18 @@ type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | Option
 
 type Options = Preferences | BeanType | Quantity | GrindOption | Deliveries
 
-function Create() {
+export default function Create() {
     const [preferences, setPreferences] = useState<Preferences | string>()
     const [beanType, setBeanType] = useState<string | undefined>()
     const [quantity, setQuantity] = useState<string | undefined>()
     const [grindOption, setGrindOption] = useState<string | undefined>()
     const [deliveries, setDeliveries] = useState<string | undefined>()
+
+    const preferencesRef = useRef<HTMLDivElement>(null)
+    const beanTypeRef = useRef<HTMLDivElement>(null)
+    const quantityRef = useRef<HTMLDivElement>(null)
+    const grindOptionRef = useRef<HTMLDivElement>(null)
+    const deliveriesRef = useRef<HTMLDivElement>(null)
 
     const uid = useUIDSeed()
 
@@ -29,6 +35,32 @@ function Create() {
     }, [preferences, beanType, quantity, grindOption, deliveries])
 
     const placeholder = (changeText: Option) => <span className='text-darkCyan'>{changeText || '_______'}</span>
+
+    const getRef = (item: string): RefObject<HTMLDivElement> => {
+        switch (item) {
+            default:
+            case 'Preferences':
+                return preferencesRef
+                break
+            case 'Bean Type':
+                return beanTypeRef
+                break
+            case 'Quantity':
+                return quantityRef
+                break
+            case 'Grind Option':
+                return grindOptionRef
+                break
+            case 'Deliveries':
+                return deliveriesRef
+                break
+        }
+    }
+
+    const handleScroll = (ref: RefObject<HTMLDivElement>) => {
+        if (ref.current) ref.current.scrollIntoView({ behavior: 'smooth' })
+        console.log('ref to scroll', ref.current)
+    }
 
     return (
         <PageContainer>
@@ -53,7 +85,7 @@ function Create() {
                     <div className='sticky top-14 flex h-max flex-col items-start [&>*]:w-full'>
                         {['Preferences', 'Bean Type', 'Quantity', 'Grind Option', 'Deliveries'].map((item, index) => (
                             <button
-                                // href={`#${item.toLowerCase().split(' ').join('-')}`}
+                                onClick={() => handleScroll(getRef(item))}
                                 disabled={item === 'Grind Option' && preferences === 'Capsule'}
                                 key={uid(item)}
                                 className={classnames(
@@ -75,6 +107,7 @@ function Create() {
                     </div>
                     <form className='grid justify-start gap-y-[88px]'>
                         <OptionsSelect
+                            ref={preferencesRef}
                             optionHeading='How do you drink your coffee'
                             data={OptionsData.preferences}
                             select={preferences}
@@ -82,6 +115,7 @@ function Create() {
                             initialOpen
                         />
                         <OptionsSelect
+                            ref={beanTypeRef}
                             optionHeading='What type of coffee'
                             data={OptionsData.beanType}
                             select={beanType}
@@ -89,6 +123,7 @@ function Create() {
                             isOptionOpen={!!preferences}
                         />
                         <OptionsSelect
+                            ref={quantityRef}
                             optionHeading='How much would you like'
                             data={OptionsData.quantity}
                             select={quantity}
@@ -96,6 +131,7 @@ function Create() {
                             isOptionOpen={!!beanType}
                         />
                         <OptionsSelect
+                            ref={grindOptionRef}
                             optionHeading='Want us to grind them'
                             data={OptionsData.grindOption}
                             select={grindOption}
@@ -104,6 +140,7 @@ function Create() {
                             isOptionOpen={!!quantity && preferences !== 'Capsule'}
                         />
                         <OptionsSelect
+                            ref={deliveriesRef}
                             optionHeading='How often should we deliver'
                             data={OptionsData.deliveries}
                             select={deliveries}
@@ -130,5 +167,3 @@ function Create() {
         </PageContainer>
     )
 }
-
-export default Create

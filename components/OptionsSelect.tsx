@@ -1,5 +1,15 @@
 import classnames from 'classnames'
-import { Dispatch, SetStateAction, MouseEvent, useRef, useEffect } from 'react'
+import {
+    Dispatch,
+    SetStateAction,
+    MouseEvent,
+    useRef,
+    useEffect,
+    HTMLAttributes,
+    ForwardedRef,
+    RefObject,
+    forwardRef,
+} from 'react'
 import { useOpen } from '../hooks'
 
 type Option = string | undefined
@@ -20,7 +30,8 @@ interface OptionsSelectProps {
     data: OptionData[]
 }
 
-export function OptionsSelect(props: OptionsSelectProps) {
+// eslint-disable-next-line react/display-name
+export const OptionsSelect = forwardRef<HTMLDivElement, OptionsSelectProps>((props, ref) => {
     const { select, setSelect, data, optionHeading, isDisabled, initialOpen, isOptionOpen } = props
     const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen(initialOpen)
 
@@ -43,7 +54,7 @@ export function OptionsSelect(props: OptionsSelectProps) {
     }, [initialOpen, isOptionOpen, setOptionsOpen])
 
     return (
-        <div>
+        <div ref={ref}>
             <button
                 disabled={isDisabled}
                 onClick={handleOptionView}
@@ -88,4 +99,4 @@ export function OptionsSelect(props: OptionsSelectProps) {
             </div>
         </div>
     )
-}
+})
