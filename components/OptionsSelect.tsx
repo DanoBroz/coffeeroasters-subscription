@@ -11,6 +11,7 @@ import {
     forwardRef,
 } from 'react'
 import { useOpen } from '../hooks'
+import { handleScroll } from '../pages/create'
 
 type Option = string | undefined
 type SetStateType<SetType> = Dispatch<SetStateAction<SetType>>
@@ -28,11 +29,12 @@ interface OptionsSelectProps {
     initialOpen?: boolean
     isOptionOpen?: boolean
     data: OptionData[]
+    nextRef: RefObject<HTMLDivElement>
 }
 
 // eslint-disable-next-line react/display-name
 export const OptionsSelect = forwardRef<HTMLDivElement, OptionsSelectProps>((props, ref) => {
-    const { select, setSelect, data, optionHeading, isDisabled, initialOpen, isOptionOpen } = props
+    const { select, setSelect, data, optionHeading, isDisabled, initialOpen, isOptionOpen, nextRef } = props
     const { openState: optionsOpen, setOpenState: setOptionsOpen } = useOpen(initialOpen)
 
     const optionRef = useRef<HTMLDivElement>(null)
@@ -78,6 +80,7 @@ export const OptionsSelect = forwardRef<HTMLDivElement, OptionsSelectProps>((pro
             </button>
             <div
                 ref={optionRef}
+                onClick={() => handleScroll(nextRef)}
                 className={classnames('accordion-options grid grid-cols-3 gap-x-[23px]', {
                     'max-h-0 overflow-hidden': !optionsOpen,
                     [`max-h-[${optionScrollHeight}]`]: optionsOpen,
