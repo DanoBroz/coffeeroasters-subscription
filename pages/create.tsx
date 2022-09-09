@@ -15,6 +15,11 @@ type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | Option
 
 type Options = Preferences | BeanType | Quantity | GrindOption | Deliveries
 
+export const handleScroll = (ref: RefObject<HTMLDivElement>) => {
+    if (ref.current) ref.current.scrollIntoView({ behavior: 'smooth' })
+    console.log('ref to scroll', ref.current)
+}
+
 export default function Create() {
     const [preferences, setPreferences] = useState<Preferences | string>()
     const [beanType, setBeanType] = useState<string | undefined>()
@@ -27,6 +32,7 @@ export default function Create() {
     const quantityRef = useRef<HTMLDivElement>(null)
     const grindOptionRef = useRef<HTMLDivElement>(null)
     const deliveriesRef = useRef<HTMLDivElement>(null)
+    const resultRef = useRef<HTMLDivElement>(null)
 
     const uid = useUIDSeed()
 
@@ -55,11 +61,6 @@ export default function Create() {
                 return deliveriesRef
                 break
         }
-    }
-
-    const handleScroll = (ref: RefObject<HTMLDivElement>) => {
-        if (ref.current) ref.current.scrollIntoView({ behavior: 'smooth' })
-        console.log('ref to scroll', ref.current)
     }
 
     return (
@@ -108,6 +109,7 @@ export default function Create() {
                     <form className='grid justify-start gap-y-[88px]'>
                         <OptionsSelect
                             ref={preferencesRef}
+                            nextRef={beanTypeRef}
                             optionHeading='How do you drink your coffee'
                             data={OptionsData.preferences}
                             select={preferences}
@@ -116,6 +118,7 @@ export default function Create() {
                         />
                         <OptionsSelect
                             ref={beanTypeRef}
+                            nextRef={quantityRef}
                             optionHeading='What type of coffee'
                             data={OptionsData.beanType}
                             select={beanType}
@@ -124,6 +127,7 @@ export default function Create() {
                         />
                         <OptionsSelect
                             ref={quantityRef}
+                            nextRef={preferences === 'Capsule' ? deliveriesRef : grindOptionRef}
                             optionHeading='How much would you like'
                             data={OptionsData.quantity}
                             select={quantity}
@@ -132,6 +136,7 @@ export default function Create() {
                         />
                         <OptionsSelect
                             ref={grindOptionRef}
+                            nextRef={deliveriesRef}
                             optionHeading='Want us to grind them'
                             data={OptionsData.grindOption}
                             select={grindOption}
@@ -141,13 +146,17 @@ export default function Create() {
                         />
                         <OptionsSelect
                             ref={deliveriesRef}
+                            nextRef={resultRef}
                             optionHeading='How often should we deliver'
                             data={OptionsData.deliveries}
                             select={deliveries}
                             setSelect={setDeliveries}
                             isOptionOpen={!!grindOption || (preferences === 'Capsule' && !!quantity)}
                         />
-                        <div className='grid gap-y-[40px]'>
+                        <div
+                            ref={resultRef}
+                            className='grid gap-y-[40px]'
+                        >
                             <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
                                 <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>How it works</span>
                                 <p className='font-fraunces text-2xl font-bold leading-[40px] text-white'>
