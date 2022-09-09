@@ -47,9 +47,9 @@ export const HowSection = ({ className, isDark = false }: HowSectionProps) => {
                 />
             </div>
             {!isDark && (
-                <Button>
-                    <Link href='/create'>Create your plan</Link>
-                </Button>
+                <Link href='/create'>
+                    <Button>Create your plan</Button>
+                </Link>
             )}
         </section>
     )
