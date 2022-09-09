@@ -19,9 +19,9 @@ const Home: NextPage = () => {
                                 our best roasters delivered directly to your door, at your schedule.
                             </p>
                         </div>
-                        <Button>
-                            <Link href='/create'>Create your plan</Link>
-                        </Button>
+                        <Link href='/create'>
+                            <Button>Create your plan</Button>
+                        </Link>
                     </div>
                 </Jumbotron>
                 <Collections />
