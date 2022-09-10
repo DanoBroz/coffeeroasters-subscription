@@ -1,9 +1,11 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { Button, Jumbotron, OptionsSelect } from '../components'
 import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
 import { useUIDSeed } from 'react-uid'
 import classnames from 'classnames'
+import { useOpen } from '../hooks'
+import { Portal } from 'react-portal'
 
 type Option = string | undefined
 
@@ -33,6 +35,8 @@ export default function Create() {
     const grindOptionRef = useRef<HTMLDivElement>(null)
     const deliveriesRef = useRef<HTMLDivElement>(null)
     const resultRef = useRef<HTMLDivElement>(null)
+
+    const { openState, setOpenState } = useOpen(true)
 
     const uid = useUIDSeed()
 
@@ -199,6 +203,13 @@ export default function Create() {
                                 <Button>Create my plan!</Button>
                             </div>
                         </div>
+                        {openState && (
+                            <Portal>
+                                <div>
+                                    <h2>Hello there</h2>
+                                </div>
+                            </Portal>
+                        )}
                     </form>
                 </div>
             </div>
