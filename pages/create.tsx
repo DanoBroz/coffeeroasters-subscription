@@ -36,10 +36,6 @@ export default function Create() {
 
     const uid = useUIDSeed()
 
-    useEffect(() => {
-        console.log(preferences, beanType, quantity, grindOption, deliveries)
-    }, [preferences, beanType, quantity, grindOption, deliveries])
-
     const placeholder = (changeText: Option) => (
         <span className='text-darkCyan'>{changeText || '_______'}</span>
     )
