@@ -21,11 +21,11 @@ export const handleScroll = (ref: RefObject<HTMLDivElement>) => {
 }
 
 export default function Create() {
-    const [preferences, setPreferences] = useState<Preferences | string>()
-    const [beanType, setBeanType] = useState<string | undefined>()
-    const [quantity, setQuantity] = useState<string | undefined>()
-    const [grindOption, setGrindOption] = useState<string | undefined>()
-    const [deliveries, setDeliveries] = useState<string | undefined>()
+    const [preferences, setPreferences] = useState<Options>()
+    const [beanType, setBeanType] = useState<Options>()
+    const [quantity, setQuantity] = useState<Options>()
+    const [grindOption, setGrindOption] = useState<Options>()
+    const [deliveries, setDeliveries] = useState<Options>()
 
     const preferencesRef = useRef<HTMLDivElement>(null)
     const beanTypeRef = useRef<HTMLDivElement>(null)
@@ -40,26 +40,23 @@ export default function Create() {
         console.log(preferences, beanType, quantity, grindOption, deliveries)
     }, [preferences, beanType, quantity, grindOption, deliveries])
 
-    const placeholder = (changeText: Option) => <span className='text-darkCyan'>{changeText || '_______'}</span>
+    const placeholder = (changeText: Option) => (
+        <span className='text-darkCyan'>{changeText || '_______'}</span>
+    )
 
     const getRef = (item: string): RefObject<HTMLDivElement> => {
         switch (item) {
             default:
             case 'Preferences':
                 return preferencesRef
-                break
             case 'Bean Type':
                 return beanTypeRef
-                break
             case 'Quantity':
                 return quantityRef
-                break
             case 'Grind Option':
                 return grindOptionRef
-                break
             case 'Deliveries':
                 return deliveriesRef
-                break
         }
     }
 
@@ -73,8 +70,9 @@ export default function Create() {
                     <div className='grid max-w-[486px] gap-8 py-[134px]'>
                         <h1>Create a plan</h1>
                         <p className='pr-[41px] font-barlow font-light'>
-                            Build a subscription plan that best fits your needs. We offer an assortment of the best artisan
-                            coffees from around the globe delivered fresh to your door.
+                            Build a subscription plan that best fits your needs.
+                            We offer an assortment of the best artisan coffees
+                            from around the globe delivered fresh to your door.
                         </p>
                     </div>
                 </Jumbotron>
@@ -84,25 +82,41 @@ export default function Create() {
                 />
                 <div className='mb-[168px] grid grid-cols-[255px_minmax(328px,_1fr)] gap-x-[125px] px-[85px]'>
                     <div className='sticky top-14 flex h-max flex-col items-start [&>*]:w-full'>
-                        {['Preferences', 'Bean Type', 'Quantity', 'Grind Option', 'Deliveries'].map((item, index) => (
+                        {[
+                            'Preferences',
+                            'Bean Type',
+                            'Quantity',
+                            'Grind Option',
+                            'Deliveries',
+                        ].map((item, index) => (
                             <button
                                 onClick={() => handleScroll(getRef(item))}
-                                disabled={item === 'Grind Option' && preferences === 'Capsule'}
+                                disabled={
+                                    item === 'Grind Option' &&
+                                    preferences === 'Capsule'
+                                }
                                 key={uid(item)}
                                 className={classnames(
                                     'flex gap-[29px] border-b border-Grey py-6 font-fraunces text-2xl font-bold opacity-40 transition-opacity first:pt-0 last:border-b-0 hover:opacity-60 disabled:opacity-20 disabled:hover:cursor-not-allowed disabled:hover:opacity-20 [&>span:first-child]:first:text-darkCyan',
                                     {
                                         'opacity-100 hover:opacity-80':
-                                            (item === 'Preferences' && !!preferences) ||
-                                            (item === 'Bean Type' && !!beanType) ||
-                                            (item === 'Quantity' && !!quantity) ||
-                                            (item === 'Grind Option' && !!grindOption) ||
-                                            (item === 'Deliveries' && !!deliveries),
+                                            (item === 'Preferences' &&
+                                                !!preferences) ||
+                                            (item === 'Bean Type' &&
+                                                !!beanType) ||
+                                            (item === 'Quantity' &&
+                                                !!quantity) ||
+                                            (item === 'Grind Option' &&
+                                                !!grindOption) ||
+                                            (item === 'Deliveries' &&
+                                                !!deliveries),
                                     }
                                 )}
                             >
                                 <span className='text-Grey'>0{index + 1}</span>
-                                <span className='text-darkGreyBlue'>{item}</span>
+                                <span className='text-darkGreyBlue'>
+                                    {item}
+                                </span>
                             </button>
                         ))}
                     </div>
@@ -127,7 +141,11 @@ export default function Create() {
                         />
                         <OptionsSelect
                             ref={quantityRef}
-                            nextRef={preferences === 'Capsule' ? deliveriesRef : grindOptionRef}
+                            nextRef={
+                                preferences === 'Capsule'
+                                    ? deliveriesRef
+                                    : grindOptionRef
+                            }
                             optionHeading='How much would you like'
                             data={OptionsData.quantity}
                             select={quantity}
@@ -142,7 +160,9 @@ export default function Create() {
                             select={grindOption}
                             setSelect={setGrindOption}
                             isDisabled={preferences === 'Capsule'}
-                            isOptionOpen={!!quantity && preferences !== 'Capsule'}
+                            isOptionOpen={
+                                !!quantity && preferences !== 'Capsule'
+                            }
                         />
                         <OptionsSelect
                             ref={deliveriesRef}
@@ -151,19 +171,32 @@ export default function Create() {
                             data={OptionsData.deliveries}
                             select={deliveries}
                             setSelect={setDeliveries}
-                            isOptionOpen={!!grindOption || (preferences === 'Capsule' && !!quantity)}
+                            isOptionOpen={
+                                !!grindOption ||
+                                (preferences === 'Capsule' && !!quantity)
+                            }
                         />
                         <div
                             ref={resultRef}
                             className='grid gap-y-[40px]'
                         >
                             <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
-                                <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>How it works</span>
+                                <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>
+                                    How it works
+                                </span>
                                 <p className='font-fraunces text-2xl font-bold leading-[40px] text-white'>
-                                    “I drink my coffee using {placeholder(preferences)}, with a {placeholder(beanType)} type of
-                                    bean. {placeholder(quantity)}
-                                    {preferences !== 'Capsule' ? <span> ground ala {placeholder(grindOption)}</span> : null}, sent
-                                    to me {placeholder(deliveries)}.”
+                                    “I drink my coffee using{' '}
+                                    {placeholder(preferences)}, with a{' '}
+                                    {placeholder(beanType)} type of bean.{' '}
+                                    {placeholder(quantity)}
+                                    {preferences !== 'Capsule' ? (
+                                        <span>
+                                            {' '}
+                                            ground ala{' '}
+                                            {placeholder(grindOption)}
+                                        </span>
+                                    ) : null}
+                                    , sent to me {placeholder(deliveries)}.”
                                 </p>
                             </div>
                             <div className='text-right'>
