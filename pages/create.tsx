@@ -4,8 +4,8 @@ import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
 import { useUIDSeed } from 'react-uid'
 import classnames from 'classnames'
-import { useOpen } from '../hooks'
-import { Portal } from 'react-portal'
+// import { useOpen } from '../hooks'
+// import { Portal } from 'react-portal'
 
 type Option = string | undefined
 
