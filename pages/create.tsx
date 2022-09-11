@@ -36,7 +36,7 @@ export default function Create() {
     const deliveriesRef = useRef<HTMLDivElement>(null)
     const resultRef = useRef<HTMLDivElement>(null)
 
-    const { openState, setOpenState } = useOpen(true)
+    // const { openState, setOpenState } = useOpen(true)
 
     const uid = useUIDSeed()
 
