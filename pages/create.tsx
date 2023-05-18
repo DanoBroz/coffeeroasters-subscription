@@ -1,11 +1,11 @@
-import { RefObject, useRef, useState } from 'react'
+import { RefObject, useRef, useState, MouseEvent } from 'react'
 import { Button, Jumbotron, OptionsSelect } from '../components'
 import { HowSection, PageContainer } from '../containers'
 import { OptionsData } from '../data'
 import { useUIDSeed } from 'react-uid'
 import classnames from 'classnames'
-// import { useOpen } from '../hooks'
-// import { Portal } from 'react-portal'
+import { useOpen } from '../hooks'
+import SummaryModal from '../components/SummaryModal'
 
 type Option = string | undefined
 
@@ -36,7 +36,7 @@ export default function Create() {
     const deliveriesRef = useRef<HTMLDivElement>(null)
     const resultRef = useRef<HTMLDivElement>(null)
 
-    // const { openState, setOpenState } = useOpen(true)
+    const { openState, setOpenState } = useOpen()
 
     const uid = useUIDSeed()
 
@@ -200,16 +200,34 @@ export default function Create() {
                                 </p>
                             </div>
                             <div className='text-right'>
-                                <Button>Create my plan!</Button>
+                                <Button
+                                    onClick={(e: MouseEvent) => {
+                                        e.preventDefault()
+                                        setOpenState(true)
+                                    }}
+                                >
+                                    Create my plan!
+                                </Button>
                             </div>
                         </div>
-                        {/* {openState && (
-                            <Portal>
-                                <div>
-                                    <h2>Hello there</h2>
-                                </div>
-                            </Portal>
-                        )} */}
+                        <SummaryModal
+                            show={openState}
+                            onClose={() => setOpenState(false)}
+                        >
+                            <p className='mb-2 font-fraunces text-2xl font-bold leading-[40px]'>
+                                “I drink my coffee using{' '}
+                                {placeholder(preferences)}, with a{' '}
+                                {placeholder(beanType)} type of bean.{' '}
+                                {placeholder(quantity)}
+                                {preferences !== 'Capsule' ? (
+                                    <span>
+                                        {' '}
+                                        ground ala {placeholder(grindOption)}
+                                    </span>
+                                ) : null}
+                                , sent to me {placeholder(deliveries)}.”
+                            </p>
+                        </SummaryModal>
                     </form>
                 </div>
             </div>
