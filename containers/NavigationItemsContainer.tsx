@@ -26,6 +26,7 @@ export const NavigationItemsContainer = ({ isLight }: ContainerProps) => {
                 </a>
             </Link>
             <div
+                role='navigation'
                 className={classnames(
                     'flex gap-8 font-barlow text-xs font-bold uppercase leading-[15px] tracking-[0.92px] text-Grey [&>*]:transition-colors',
                     {
@@ -34,9 +35,24 @@ export const NavigationItemsContainer = ({ isLight }: ContainerProps) => {
                     }
                 )}
             >
-                <Link href='/'>home</Link>
-                <Link href='/about'>about us</Link>
-                <Link href='/create'>create your plan</Link>
+                <Link
+                    role='link'
+                    href='/'
+                >
+                    home
+                </Link>
+                <Link
+                    role='link'
+                    href='/about'
+                >
+                    about us
+                </Link>
+                <Link
+                    role='link'
+                    href='/create'
+                >
+                    create your plan
+                </Link>
             </div>
         </>
     )
