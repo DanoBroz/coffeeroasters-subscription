@@ -14,4 +14,11 @@ describe('Footer renders with all components', () => {
         })
         expect(footerContainer).toBeInTheDocument()
     })
+
+    test('Renders logo with link to homepage', () => {
+        renderComponent()
+        const logo = screen.getByRole('link', { name: /coffeeroasters logo/i })
+        expect(logo).toBeInTheDocument()
+        expect(logo).toHaveAttribute('href', '/')
+    })
 })

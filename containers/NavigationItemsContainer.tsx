@@ -9,11 +9,16 @@ interface ContainerProps {
 export const NavigationItemsContainer = ({ isLight }: ContainerProps) => {
     return (
         <>
-            <Link href='/'>
+            <Link
+                aria-label='coffeeroasters logo'
+                href='/'
+            >
                 <a>
                     <Image
                         className='transition-opacity hover:opacity-80'
-                        src={`/assets/shared/desktop/logo-${isLight ? 'light' : 'dark'}.svg`}
+                        src={`/assets/shared/desktop/logo-${
+                            isLight ? 'light' : 'dark'
+                        }.svg`}
                         alt='coffeeroasters logo'
                         width='236px'
                         height='26px'
