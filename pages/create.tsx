@@ -17,9 +17,9 @@ type Deliveries = 'Every week' | 'Every 2 weeks' | 'Every month' | Option
 
 type Options = Preferences | BeanType | Quantity | GrindOption | Deliveries
 
-export const handleScroll = (ref: RefObject<HTMLDivElement>) => {
-    if (ref.current) ref.current.scrollIntoView({ behavior: 'smooth' })
-    console.log('ref to scroll', ref.current)
+export const handleScroll = (ref?: RefObject<HTMLDivElement>) => {
+    if (ref?.current) ref.current.scrollIntoView({ behavior: 'smooth' })
+    console.log('ref to scroll', ref?.current)
 }
 
 export default function Create() {
@@ -78,7 +78,7 @@ export default function Create() {
                 </Jumbotron>
                 <HowSection
                     isDark
-                    className='mb-[168px] py-[100px] px-[85px]'
+                    className='mb-[168px] px-[85px] py-[100px]'
                 />
                 <div className='mb-[168px] grid grid-cols-[255px_minmax(328px,_1fr)] gap-x-[125px] px-[85px]'>
                     <div className='sticky top-14 flex h-max flex-col items-start [&>*]:w-full'>
@@ -180,7 +180,7 @@ export default function Create() {
                             ref={resultRef}
                             className='grid gap-y-[40px]'
                         >
-                            <div className='rounded-[10px] bg-darkGreyBlue py-[47px] px-16'>
+                            <div className='rounded-[10px] bg-darkGreyBlue px-16 py-[47px]'>
                                 <span className='mb-2 inline-block font-fraunces text-2xl font-bold text-Grey'>
                                     How it works
                                 </span>

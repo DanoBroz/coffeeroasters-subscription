@@ -27,7 +27,7 @@ interface OptionsSelectProps {
     initialOpen?: boolean
     isOptionOpen?: boolean
     data: OptionData[]
-    nextRef: RefObject<HTMLDivElement>
+    nextRef?: RefObject<HTMLDivElement>
 }
 
 // eslint-disable-next-line react/display-name
